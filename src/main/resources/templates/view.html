@@ -1,0 +1,84 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+>
+
+<head>
+    <!-- CSS INCLUDE -->
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+          crossorigin="anonymous"></link>
+    <!-- EOF CSS INCLUDE -->
+    <style>
+        .pagination-centered {
+            text-align: center;
+        }
+
+        .disabled {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+
+        .pointer-disabled {
+            pointer-events: none;
+        }
+
+        .left-col {
+            height: 500px !important;
+            overflow: scroll;
+        }
+
+        ​
+
+        }
+    </style>
+</head>
+<body>
+<div class="page-container page-navigation-toggled">
+    <div class="page-title">
+        <h2>Deep Blue Ocean</h2>
+    </div>
+    <div class="row">
+            <div class="col-xs-6">
+                <form id="contentForm" action="#">
+                        <input type="text" name="title" id="title"/>
+                        <input type="text" name="name" id="name"/>
+                        <input type="text" name="lat" id="lat" readonly />
+                        <input type="text" name="lat" id="lng" readonly />
+                        <select name="country" id="countryNameList"/>
+                        <select name="state" id="stateNameList">
+                            <option name="none">Select a state</option>
+                        </select>>
+                        <select name="city" id="cityNameList">
+                            <option name="none">Select a city</option>
+                        </select>>
+						<textarea id="content" class="content" name="content" rows="30"
+                                  cols="80" style="margin-left: 40px;">This is my textarea.</textarea>
+                    <input type="submit" value="Save" id="submitButton"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="http://cms.local/scripts/ckeditor/ckeditor.js"></script>
+<script src="http://cms.local/scripts/ckfinder/ckfinder.js"></script>
+<script src="http://cms.local/scripts/jquery/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" th:src="@{/js/application.js}" />
+
+
+<script th:inline="javascript">
+
+    var editor = CKEDITOR.replace('content', {
+      height: 260,
+      width: 700,
+      filebrowserBrowseUrl: 'http://cms.local/scripts/ckfinder/ckfinder.html',
+	  filebrowserUploadUrl: 'http://cms.local/scripts/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
+	  filebrowserWindowWidth: '1000',
+      filebrowserWindowHeight: '700'
+    });
+    CKFinder.setupCKEditor( editor );
+
+
+</script>
+</body>
+</html>
