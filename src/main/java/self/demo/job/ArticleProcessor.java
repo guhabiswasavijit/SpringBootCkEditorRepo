@@ -1,34 +1,22 @@
 package self.demo.job;
 
-import org.springframework.batch.item.ExecutionContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.item.ItemProcessor;
-import org.springframework.batch.item.ItemStream;
-import org.springframework.batch.item.ItemStreamException;
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Component;
 import self.demo.model.MindWave;
 import self.demo.solr.beans.Restaurant;
 
-
-public class ArticleProcessor implements ItemProcessor<MindWave,Restaurant>, ItemStream {
+@Component("processor")
+public class ArticleProcessor implements ItemProcessor<MindWave,Restaurant>{
+    private static final Logger LOGGER = LoggerFactory.getLogger("JobLogger");
     @Override
     public Restaurant process(MindWave mindWave) throws Exception {
+        LOGGER.info("Processing article {}",mindWave.getTitle());
         Restaurant restaurant = new Restaurant();
         BeanUtils.copyProperties(mindWave,restaurant,"content","lat","lng");
         return restaurant;
     }
 
-    @Override
-    public void open(ExecutionContext executionContext) throws ItemStreamException {
-
-    }
-
-    @Override
-    public void update(ExecutionContext executionContext) throws ItemStreamException {
-
-    }
-
-    @Override
-    public void close() throws ItemStreamException {
-
-    }
 }

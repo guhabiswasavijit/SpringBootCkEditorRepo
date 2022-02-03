@@ -7,7 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name="MindWave")
+@Table(name="mind_wave")
 @EqualsAndHashCode
 @Getter
 @Setter

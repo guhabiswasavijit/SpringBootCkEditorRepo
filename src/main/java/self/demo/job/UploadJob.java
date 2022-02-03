@@ -27,7 +27,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @EnableBatchProcessing
 @EnableScheduling
 public class UploadJob {
-    private final Logger logger = LoggerFactory.getLogger(UploadJob.class);
+    private final Logger logger = LoggerFactory.getLogger("JobLogger");
     private AtomicBoolean enabled = new AtomicBoolean(true);
     private AtomicInteger batchRunCounter = new AtomicInteger(0);
     @Autowired
@@ -45,7 +45,7 @@ public class UploadJob {
     @Autowired
     private JobCompletionNotificationListener listener;
 
-    @Scheduled(fixedRate = 2000)
+    @Scheduled(cron = "0 0 12 ? * SUN")
     public void launchJob() throws Exception {
         Date date = new Date();
         logger.debug("scheduler starts at " + date);

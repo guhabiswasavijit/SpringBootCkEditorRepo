@@ -1,4 +1,5 @@
 package self.demo.job;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.BatchStatus;
@@ -7,18 +8,13 @@ import org.springframework.batch.core.listener.JobExecutionListenerSupport;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
-@Component
+
+@Component("listener")
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JobCompletionNotificationListener.class);
-
-    private final JdbcTemplate jdbcTemplate;
-
+    private static final Logger LOGGER = LoggerFactory.getLogger("JobLogger");
     @Autowired
-    public JobCompletionNotificationListener(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
+    private  JdbcTemplate jdbcTemplate;
     @Override
     public void afterJob(JobExecution jobExecution) {
         String articles = jobExecution.getExecutionContext().getString("articleInserted");

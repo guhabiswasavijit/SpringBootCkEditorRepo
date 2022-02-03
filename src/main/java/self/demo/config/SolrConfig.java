@@ -4,12 +4,12 @@ import org.apache.solr.client.solrj.SolrClient;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.apache.solr.client.solrj.impl.XMLResponseParser;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.solr.core.SolrTemplate;
 import org.springframework.data.solr.repository.config.EnableSolrRepositories;
 
-@ComponentScan
-@EnableSolrRepositories("self.demo.solr.repository")
+@Configuration
+@EnableSolrRepositories(value="self.demo.solr.repository")
 public class SolrConfig {
     @Bean
     public SolrClient solrServer() {
