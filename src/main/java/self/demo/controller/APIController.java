@@ -1,12 +1,13 @@
 package self.demo.controller;
 
-import com.google.gson.Gson;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import self.demo.dto.MindWaveDTO;
-import self.demo.model.*;
+import self.demo.model.City;
+import self.demo.model.Country;
+import self.demo.model.MindWave;
+import self.demo.model.State;
 import self.demo.repository.CityRepo;
 import self.demo.repository.CountryRepo;
 import self.demo.repository.MindWaveRepo;
@@ -26,39 +27,26 @@ public class APIController {
     @Autowired
     private CityRepo cityRepo;
     @GetMapping(value = {"/fetchCities"})
-    public ResponseEntity<?> fetchCities(@RequestParam("state") String stateCode,@RequestParam("country") String countryCode) {
-        Response response = new Response();
+    public List<City> fetchCities(@RequestParam("state") String stateCode,@RequestParam("country") String countryCode) {
         List<City> cities = cityRepo.findByCountryState(stateCode,countryCode);
-        String jsonString = new Gson().toJson(cities);
-        response.setData(jsonString);
-        return ResponseEntity.ok(response);
+        return cities;
     }
-    @GetMapping(value = {"/fetchStates/{country}"})
-    public ResponseEntity<?> fetchStates(@PathVariable String country) {
-        Response response = new Response();
+    @GetMapping(value = {"/fetchStates"})
+    public List<State> fetchStates(@RequestParam("country") String country) {
         List<State> states = stateRepo.findByCountry(country);
-        String jsonString = new Gson().toJson(states);
-        response.setData(jsonString);
-        return ResponseEntity.ok(response);
+        return states;
     }
-    @GetMapping(value = {"/fetchCountries/{region}"})
-    public ResponseEntity<?> fetchCountries(@PathVariable String region) {
-        Response response = new Response();
+    @GetMapping(value = {"/fetchCountries"})
+    public List<Country> fetchCountries(@RequestParam("region") String region) {
         List<Country> countries = countryRepo.findByRegion(region);
-        String jsonString = new Gson().toJson(countries);
-        response.setData(jsonString);
-        return ResponseEntity.ok(response);
+        return countries;
     }
 
-    @PostMapping(value = {"/saveContent"})
-    public ResponseEntity<?> saveArticle(@RequestBody MindWaveDTO dto) {
-        Response response = new Response();
+    @PostMapping(value = {"/saveContent"},consumes = "application/json")
+    public MindWave saveArticle(@RequestBody MindWaveDTO dto) {
         MindWave entity = new MindWave();
         BeanUtils.copyProperties(dto,entity,"id");
-        MindWave save = mindWaveRepo.save(entity);
-        response.setData(save.getTitle());
-        return ResponseEntity.ok(response);
+        MindWave savedArticle = mindWaveRepo.save(entity);
+        return savedArticle;
     }
-
-
 }

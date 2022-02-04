@@ -17,8 +17,8 @@ public class Country {
     private Long id;
     @Column(name = "name", length = 50, nullable = false, unique = true)
     private String name;
-    @Column(name = "iso3", length = 50, nullable = false, unique = true)
-    private String iso3;
+    @Column(name = "iso2", length = 50, nullable = false, unique = true)
+    private String iso2;
     @Column(name = "region", length = 50, nullable = true, unique = false)
     private String region;
 }

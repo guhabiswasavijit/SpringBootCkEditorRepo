@@ -8,30 +8,31 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
           integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
           crossorigin="anonymous"></link>
-    <!-- EOF CSS INCLUDE -->
-    <style>
-        .pagination-centered {
-            text-align: center;
-        }
 
-        .disabled {
-            pointer-events: none;
-            opacity: 0.5;
-        }
+    <style type = "text/css">
+         table.data {
+            border-collapse:collapse;
+            width:100%;
+            height:100%;
+         }
+         td.left {
+            border-style:dotted;
+            border-width:3px;
+            border-color:#000000;
+            padding: 10px;
+            align:right;
+            width:30%;
+         }
+         td.right {
+            border-style:solid;
+            border-width:3px;
+            border-color:#333333;
+            padding:10px;
+            align:left;
+            width:70%;
+         }
+      </style>
 
-        .pointer-disabled {
-            pointer-events: none;
-        }
-
-        .left-col {
-            height: 500px !important;
-            overflow: scroll;
-        }
-
-        ​
-
-        }
-    </style>
 </head>
 <body>
 <div class="page-container page-navigation-toggled">
@@ -39,46 +40,47 @@
         <h2>Deep Blue Ocean</h2>
     </div>
     <div class="row">
-            <div class="col-xs-6">
+            <table class="data">
                 <form id="contentForm" action="#">
-                        <input type="text" name="title" id="title"/>
-                        <input type="text" name="name" id="name"/>
-                        <input type="text" name="lat" id="lat" readonly />
-                        <input type="text" name="lat" id="lng" readonly />
-                        <select name="country" id="countryNameList"/>
-                        <select name="state" id="stateNameList">
-                            <option name="none">Select a state</option>
-                        </select>>
-                        <select name="city" id="cityNameList">
-                            <option name="none">Select a city</option>
-                        </select>>
-						<textarea id="content" class="content" name="content" rows="30"
-                                  cols="80" style="margin-left: 40px;">This is my textarea.</textarea>
-                    <input type="submit" value="Save" id="submitButton"></input>
+                    <tr width="100%">
+                        <td class="left">Hotel Title:</td><td class="right"><input type="text" name="title" id="title"/></td>
+                    </tr>
+                    <tr width="100%">
+                        <td class="left">Hotel Name:</td><td class="right"><input type="text" name="name" id="name"/></td>
+                    </tr>
+                    <tr width="100%">
+                        <td class="left">Latitude:</td><td class="right"><input type="text" name="lat" id="lat"/></td>
+                    </tr>
+                    <tr width="100%">
+                        <td class="left">Longitude:</td><td class="right"><input type="text" name="lng" id="lng"/></td>
+                    </tr>
+                    <tr width="100%">
+                        <td class="left">Country:</td><td class="right"><select name="country" id="countryNameList"></select></td>
+                   </tr>
+                    <tr width="100%">
+                        <td class="left">State:</td><td class="right"><select name="state" id="stateNameList">
+                                                        <option name="none">Select a state</option>
+                                           </select></td>
+                    </tr>
+                    <tr width="100%">
+                        <td class="left">City:</td><td class="right"><select name="city" id="cityNameList">
+                                                <option name="none">Select a city</option>
+                                         </select></td>
+
+                    </tr>
+                    <tr width="100%">
+                        <td class="right"><textarea id="content" class="content" name="content" rows="30"
+                                      cols="80">This is my textarea.</textarea></td><td class="left"> <input type="button" value="Save" id="submitButton"/></td>
+                    </tr>
                 </form>
-            </div>
+            </table>
         </div>
     </div>
 </div>
 <script src="http://cms.local/scripts/ckeditor/ckeditor.js"></script>
 <script src="http://cms.local/scripts/ckfinder/ckfinder.js"></script>
 <script src="http://cms.local/scripts/jquery/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" th:src="@{/js/application.js}" />
+<script type="text/javascript" src="/dawn/js/application.js"></script>
 
-
-<script th:inline="javascript">
-
-    var editor = CKEDITOR.replace('content', {
-      height: 260,
-      width: 700,
-      filebrowserBrowseUrl: 'http://cms.local/scripts/ckfinder/ckfinder.html',
-	  filebrowserUploadUrl: 'http://cms.local/scripts/ckfinder/core/connector/php/connector.php?command=QuickUpload&type=Files',
-	  filebrowserWindowWidth: '1000',
-      filebrowserWindowHeight: '700'
-    });
-    CKFinder.setupCKEditor( editor );
-
-
-</script>
 </body>
 </html>
